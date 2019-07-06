@@ -1,5 +1,15 @@
 <template>
     <nav>
+
+        <v-snackbar
+            v-model="snackbar"
+            color="success"
+            top
+        >
+            <span>Awesome!ypu added a new project</span>
+            <v-btn flat color="white" @click.native="snackbar = false">Close</v-btn>
+        </v-snackbar>
+
         <v-toolbar flat app>
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-text class="text-uppercase grey--text title text-truncate">
@@ -42,7 +52,7 @@
                     </p>
                 </v-flex>
                 <v-flex class="mt-4 mb-3">
-                    <Popup/>
+                    <Popup @Addedproject="snackbar = true"/>
                 </v-flex>
             </v-layout>
             <v-list>
@@ -66,12 +76,14 @@ export default {
     components:{ Popup,},
     data(){
         return{
-            drawer:false,
+            snackbar: false,
+            drawer: false,
             links:[
                 { icon:'dashboard' , text:'Dashboard' , route:'/'},
                 { icon:'folder' , text:'My Project' , route:'/projects'},
                 { icon:'person' , text:'Team' , route:'/team'}
-            ]
+            ],
+
         }
     }
 }
